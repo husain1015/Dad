@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ultimate Dad Tier List 👨‍👧‍👦</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+```
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+        background: #0a0a0a;
+        color: #fff;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .header {
+        text-align: center;
+        margin-bottom: 2rem;
+        position: relative;
+    }
+
+    .title {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 900;
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24);
+        background-size: 300% 300%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradient 3s ease infinite;
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: -2px;
+    }
+
+    @keyframes gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .subtitle {
+        color: #888;
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+    }
+
+    .tier-container {
+        background: #1a1a1a;
+        border-radius: 20px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .tier {
+        display: flex;
+        margin-bottom: 1rem;
+        background: #2a2a2a;
+        border-radius: 15px;
+        overflow: hidden;
+        min-height: 120px;
+        transition: all 0.3s ease;
+    }
+
+    .tier:hover {
+        transform: scale(1.02);
+        box-shadow: 0 5px 20px rgba(255, 255, 255, 0.1);
+    }
+
+    .tier-label {
+        width: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        font-size: 2rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .tier-s { background: linear-gradient(135deg, #f39c12, #f1c40f); }
+    .tier-a { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+    .tier-b { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
+    .tier-c { background: linear-gradient(135deg, #3498db, #2980b9); }
+    .tier-d { background: linear-gradient(135deg, #1abc9c, #16a085); }
+
+    .tier-items {
+        flex: 1;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 15px;
+        min-height: 120px;
+        position: relative;
+    }
+
+    .tier-items.drag-over {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .item-pool {
+        background: #1a1a1a;
+        border-radius: 20px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .pool-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        text-align: center;
+        color: #fff;
+    }
+
+    .items-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+        min-height: 100px;
+    }
+
+    .dad-item {
+        background: #333;
+        border: 3px solid #444;
+        border-radius: 15px;
+        padding: 15px 20px;
+        cursor: grab;
+        transition: all 0.2s ease;
+        font-size: 2.5rem;
+        position: relative;
+        user-select: none;
+    }
+
+    .dad-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+        border-color: #666;
+    }
+
+    .dad-item.dragging {
+        opacity: 0.5;
+        cursor: grabbing;
+        transform: rotate(5deg);
+    }
+
+    .dad-item .label {
+        display: block;
+        font-size: 0.8rem;
+        margin-top: 5px;
+        text-align: center;
+        color: #ccc;
+    }
+
+    .share-section {
+        text-align: center;
+        margin-top: 3rem;
+    }
+
+    .share-btn {
+        background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+        border: none;
+        color: white;
+        padding: 1.5rem 3rem;
+        border-radius: 50px;
+        font-size: 1.3rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .share-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+    }
+
+    .share-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.5s;
+    }
+
+    .share-btn:hover::before {
+        left: 100%;
+    }
+
+    .result-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 1000;
+        padding: 20px;
+        overflow-y: auto;
+    }
+
+    .modal-content {
+        background: #1a1a1a;
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 3rem;
+        border-radius: 20px;
+        text-align: center;
+        position: relative;
+    }
+
+    .close-modal {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 2rem;
+        cursor: pointer;
+        color: #666;
+    }
+
+    .close-modal:hover {
+        color: #fff;
+    }
+
+    .result-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .result-image {
+        width: 100%;
+        max-width: 500px;
+        background: #2a2a2a;
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .mini-tier {
+        display: flex;
+        margin-bottom: 0.5rem;
+        background: #333;
+        border-radius: 10px;
+        overflow: hidden;
+        font-size: 0.9rem;
+    }
+
+    .mini-tier-label {
+        width: 40px;
+        padding: 10px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .mini-tier-items {
+        flex: 1;
+        padding: 10px;
+        display: flex;
+        gap: 5px;
+        flex-wrap: wrap;
+    }
+
+    .share-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+    }
+
+    .social-btn {
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: white;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .twitter-btn { background: #1DA1F2; }
+    .facebook-btn { background: #4267B2; }
+    .copy-btn { background: #6c757d; }
+
+    .social-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .instructions {
+        background: #2a2a2a;
+        padding: 1.5rem;
+        border-radius: 15px;
+        margin-bottom: 2rem;
+        text-align: center;
+        color: #ccc;
+    }
+
+    @media (max-width: 768px) {
+        .tier-label {
+            width: 60px;
+            font-size: 1.5rem;
+        }
+        
+        .dad-item {
+            font-size: 2rem;
+            padding: 10px 15px;
+        }
+        
+        .title {
+            letter-spacing: -1px;
+        }
+    }
+
+    .pulse {
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+</style>
+```
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">The Ultimate Dad Tier List</h1>
+            <p class="subtitle">Rank these legendary dad traits and find out what kind of dad you (or your dad) really are!</p>
+        </div>
+
+```
+    <div class="instructions">
+        <p>📋 Drag and drop the dad traits below into the tiers. Be honest - we all know where "cargo shorts" really belongs...</p>
+    </div>
+
+    <div class="tier-container">
+        <div class="tier">
+            <div class="tier-label tier-s">S</div>
+            <div class="tier-items" data-tier="S"></div>
+        </div>
+        <div class="tier">
+            <div class="tier-label tier-a">A</div>
+            <div class="tier-items" data-tier="A"></div>
+        </div>
+        <div class="tier">
+            <div class="tier-label tier-b">B</div>
+            <div class="tier-items" data-tier="B"></div>
+        </div>
+        <div class="tier">
+            <div class="tier-label tier-c">C</div>
+            <div class="tier-items" data-tier="C"></div>
+        </div>
+        <div class="tier">
+            <div class="tier-label tier-d">D</div>
+            <div class="tier-items" data-tier="D"></div>
+        </div>
+    </div>
+
+    <div class="item-pool">
+        <h2 class="pool-title">Dad Traits to Rank</h2>
+        <div class="items-container" id="itemsContainer">
+            <div class="dad-item" draggable="true" data-item="grill">
+                🍖
+                <span class="label">Grill Master</span>
+            </div>
+            <div class="dad-item" draggable="true" data-item="jokes">
+                😄
+                <span class="label">Dad Jokes</span>
+            </div>
+            <div class="dad-item" draggable="true" data-item="thermostat">
+                🌡️
+                <span class="label">Thermostat Guard</span>
+            </div>
+            <div class="dad-item" draggable="true" data-item="lawn">
+                🌱
+                <span class="label">Lawn Obsession</span>
+            </div>
+            <div class="dad-item" draggable="true" data-item="nap">
+                😴
+                <span class="label">Chair Naps</span>
+            </div>
+            <div class="dad-item" draggable="true" data-item="cargo">
+                👖
+                <span class="label">Cargo Shorts</span>
+            </div>
+            <div class="dad-item" draggable="true" data-item="sneeze">
+                🤧
+                <span class="label">Loud Sneezes</span>
+            </div>
+            <div class="dad-item" draggable="true" data-item="history">
+                📺
+                <span class="label">History Channel</span>
+            </div>
+            <div class="dad-item" draggable="true" data-item="early">
+                ⏰
+                <span class="label">5am Wake-ups</span>
+            </div>
+            <div class="dad-item" draggable="true" data-item="tools">
+                🔧
+                <span class="label">Tool Collection</span>
+            </div>
+            <div class="dad-item" draggable="true" data-item="socks">
+                🧦
+                <span class="label">Socks & Sandals</span>
+            </div>
+            <div class="dad-item" draggable="true" data-item="car">
+                🚗
+                <span class="label">"Ask Mom"</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="share-section">
+        <button class="share-btn pulse" id="shareBtn">Generate My Dad Tier List! 🏆</button>
+    </div>
+</div>
+
+<div class="result-modal" id="resultModal">
+    <div class="modal-content">
+        <span class="close-modal" id="closeModal">&times;</span>
+        <h2 class="result-title">Your Dad Tier List Results!</h2>
+        <div class="result-image" id="resultImage"></div>
+        <div class="share-buttons">
+            <a href="#" class="social-btn twitter-btn" id="twitterShare">Share on Twitter</a>
+            <a href="#" class="social-btn facebook-btn" id="facebookShare">Share on Facebook</a>
+            <button class="social-btn copy-btn" id="copyLink">Copy Results</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let draggedItem = null;
+    const items = document.querySelectorAll('.dad-item');
+    const tierItems = document.querySelectorAll('.tier-items');
+    const itemsContainer = document.getElementById('itemsContainer');
+
+    // Drag and drop functionality
+    items.forEach(item => {
+        item.addEventListener('dragstart', (e) => {
+            draggedItem = e.target;
+            e.target.classList.add('dragging');
+        });
+
+        item.addEventListener('dragend', (e) => {
+            e.target.classList.remove('dragging');
+        });
+    });
+
+    [itemsContainer, ...tierItems].forEach(container => {
+        container.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            container.classList.add('drag-over');
+        });
+
+        container.addEventListener('dragleave', () => {
+            container.classList.remove('drag-over');
+        });
+
+        container.addEventListener('drop', (e) => {
+            e.preventDefault();
+            if (draggedItem) {
+                container.appendChild(draggedItem);
+                container.classList.remove('drag-over');
+            }
+        });
+    });
+
+    // Touch support for mobile
+    let touchItem = null;
+    let touchOffset = { x: 0, y: 0 };
+
+    items.forEach(item => {
+        item.addEventListener('touchstart', (e) => {
+            touchItem = e.target;
+            const touch = e.touches[0];
+            const rect = touchItem.getBoundingClientRect();
+            touchOffset.x = touch.clientX - rect.left;
+            touchOffset.y = touch.clientY - rect.top;
+            touchItem.style.position = 'fixed';
+            touchItem.style.zIndex = '1000';
+        });
+
+        item.addEventListener('touchmove', (e) => {
+            if (!touchItem) return;
+            e.preventDefault();
+            const touch = e.touches[0];
+            touchItem.style.left = `${touch.clientX - touchOffset.x}px`;
+            touchItem.style.top = `${touch.clientY - touchOffset.y}px`;
+        });
+
+        item.addEventListener('touchend', (e) => {
+            if (!touchItem) return;
+            const touch = e.changedTouches[0];
+            const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+            
+            touchItem.style.position = '';
+            touchItem.style.zIndex = '';
+            touchItem.style.left = '';
+            touchItem.style.top = '';
+
+            if (elementBelow) {
+                const tierContainer = elementBelow.closest('.tier-items') || elementBelow.closest('.items-container');
+                if (tierContainer) {
+                    tierContainer.appendChild(touchItem);
+                }
+            }
+            touchItem = null;
+        });
+    });
+
+    // Generate results
+    document.getElementById('shareBtn').addEventListener('click', generateResults);
+
+    function generateResults() {
+        const tiers = {
+            S: [],
+            A: [],
+            B: [],
+            C: [],
+            D: []
+        };
+
+        tierItems.forEach(tierContainer => {
+            const tier = tierContainer.dataset.tier;
+            const items = tierContainer.querySelectorAll('.dad-item');
+            items.forEach(item => {
+                tiers[tier].push({
+                    emoji: item.childNodes[0].textContent.trim(),
+                    label: item.querySelector('.label').textContent
+                });
+            });
+        });
+
+        // Check if user has ranked items
+        const totalRanked = Object.values(tiers).flat().length;
+        if (totalRanked === 0) {
+            alert('Please rank at least some dad traits first!');
+            return;
+        }
+
+        // Generate result display
+        const resultImage = document.getElementById('resultImage');
+        resultImage.innerHTML = `
+            <h3 style="margin-bottom: 1rem; color: #fff;">My Dad Tier List</h3>
+            ${Object.entries(tiers).map(([tier, items]) => `
+                <div class="mini-tier">
+                    <div class="mini-tier-label tier-${tier.toLowerCase()}">${tier}</div>
+                    <div class="mini-tier-items">
+                        ${items.map(item => `<span>${item.emoji}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('')}
+            <p style="margin-top: 1rem; color: #888; font-size: 0.8rem;">Created at UltimateDadTierList.com</p>
+        `;
+
+        // Generate dad type based on rankings
+        const dadType = calculateDadType(tiers);
+        resultImage.innerHTML = `<h3 style="margin-bottom: 0.5rem; color: #4ecdc4;">You're a: ${dadType}</h3>` + resultImage.innerHTML;
+
+        // Show modal
+        document.getElementById('resultModal').style.display = 'block';
+
+        // Setup sharing
+        setupSharing(tiers, dadType);
+    }
+
+    function calculateDadType(tiers) {
+        // Fun logic to determine dad type based on S-tier choices
+        const sTierItems = tiers.S.map(item => item.label);
+        
+        if (sTierItems.includes('Grill Master')) return '🔥 BBQ Legend Dad';
+        if (sTierItems.includes('Dad Jokes')) return '😄 Comedy Gold Dad';
+        if (sTierItems.includes('Tool Collection')) return '🔧 Fix-It Felix Dad';
+        if (sTierItems.includes('Lawn Obsession')) return '🌱 Suburban King Dad';
+        if (sTierItems.includes('History Channel')) return '📚 Professor Dad';
+        if (sTierItems.includes('Chair Naps')) return '😴 Chill Master Dad';
+        
+        return '👑 Ultimate Dad';
+    }
+
+    function setupSharing(tiers, dadType) {
+        const shareText = `I'm a ${dadType}! Check out my Dad Tier List:\n\n` +
+            Object.entries(tiers)
+                .filter(([_, items]) => items.length > 0)
+                .map(([tier, items]) => `${tier}-Tier: ${items.map(i => i.emoji).join(' ')}`)
+                .join('\n') +
+            '\n\nMake your own at [link]';
+
+        document.getElementById('twitterShare').href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
+        document.getElementById('facebookShare').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`;
+        
+        document.getElementById('copyLink').addEventListener('click', () => {
+            navigator.clipboard.writeText(shareText);
+            alert('Copied to clipboard! Share your dad tier list! 📋');
+        });
+    }
+
+    // Close modal
+    document.getElementById('closeModal').addEventListener('click', () => {
+        document.getElementById('resultModal').style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === document.getElementById('resultModal')) {
+            document.getElementById('resultModal').style.display = 'none';
+        }
+    });
+</script>
+```
+
+</body>
+</html>
