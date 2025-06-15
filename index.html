@@ -3,159 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Official Dad Certificate Generator 🏆</title>
+    <title>What's Your Dad Type? - AI Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lexend+Deca:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* Custom font for certificate-style text */
-        .font-serif {
-            font-family: 'Playfair Display', serif;
-        }
-        .font-sans {
+        body {
             font-family: 'Inter', sans-serif;
         }
-        /* Custom animation for the loading spinner */
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .font-display {
+            font-family: 'Lexend Deca', sans-serif;
         }
-        .loading-spinner {
-            animation: spin 1s linear infinite;
+        /* Page transition animation */
+        .page {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Button hover effect */
+        .answer-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
     </style>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 font-sans text-gray-800 dark:text-gray-200 flex items-center justify-center min-h-screen p-4">
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 flex items-center justify-center min-h-screen p-4 transition-colors duration-300">
 
-    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-6 md:p-10 w-full max-w-3xl">
-        <div id="formContainer">
-            <h1 class="font-serif text-3xl md:text-4xl font-bold text-center text-blue-800 dark:text-blue-400">Official Dad Certificate Generator 🏆</h1>
-            <p class="text-center text-gray-600 dark:text-gray-400 mt-2 mb-8">Create a personalized, AI-enhanced certificate for the world's greatest dad!</p>
-
-            <!-- Form Section -->
-            <div class="space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label for="dadName" class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Dad's Name:</label>
-                        <input type="text" id="dadName" placeholder="e.g., John Smith" value="Captain Awesome" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
-                    </div>
-                    <div>
-                        <label for="childName" class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">From:</label>
-                        <input type="text" id="childName" placeholder="e.g., The Kids" value="The Adoring Fans" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-3">Dad Achievements (Select all that apply):</label>
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                        <div class="flex items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                            <input type="checkbox" id="jokes" class="h-5 w-5 rounded text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-600 dark:bg-gray-900 dark:focus:ring-offset-gray-800" checked><label for="jokes" class="ml-3 text-sm font-medium">🤣 Master of Dad Jokes</label>
-                        </div>
-                        <div class="flex items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                            <input type="checkbox" id="grill" class="h-5 w-5 rounded text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-600 dark:bg-gray-900 dark:focus:ring-offset-gray-800" checked><label for="grill" class="ml-3 text-sm font-medium">🍖 BBQ Champion</label>
-                        </div>
-                        <div class="flex items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                            <input type="checkbox" id="fix" class="h-5 w-5 rounded text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-600 dark:bg-gray-900 dark:focus:ring-offset-gray-800"><label for="fix" class="ml-3 text-sm font-medium">🔧 Can Fix Anything</label>
-                        </div>
-                        <div class="flex items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                            <input type="checkbox" id="taxi" class="h-5 w-5 rounded text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-600 dark:bg-gray-900 dark:focus:ring-offset-gray-800"><label for="taxi" class="ml-3 text-sm font-medium">🚗 24/7 Taxi Service</label>
-                        </div>
-                        <div class="flex items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                            <input type="checkbox" id="thermostat" class="h-5 w-5 rounded text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-600 dark:bg-gray-900 dark:focus:ring-offset-gray-800" checked><label for="thermostat" class="ml-3 text-sm font-medium">🌡️ Thermostat Guardian</label>
-                        </div>
-                         <div class="flex items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                            <input type="checkbox" id="nap" class="h-5 w-5 rounded text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-600 dark:bg-gray-900 dark:focus:ring-offset-gray-800"><label for="nap" class="ml-3 text-sm font-medium">😴 Power Nap Expert</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Generate Button -->
-            <button id="generateBtn" class="w-full mt-8 bg-blue-700 hover:bg-blue-800 text-white font-bold py-4 px-4 rounded-lg text-lg flex items-center justify-center transition-transform transform hover:scale-105 disabled:bg-blue-400 disabled:cursor-not-allowed">
-                <span id="btn-text">✨ Generate with AI ✨</span>
-                <div id="btn-loader" class="hidden w-6 h-6 border-4 border-white border-t-transparent rounded-full loading-spinner"></div>
+    <main class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-2xl mx-auto overflow-hidden">
+        
+        <!-- Start Screen -->
+        <div id="startScreen" class="p-8 md:p-12 text-center page">
+            <div class="text-6xl mb-4">👨‍👧‍👦</div>
+            <h1 class="font-display text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">The Official Dad Type Analyzer</h1>
+            <p class="mt-4 text-gray-600 dark:text-gray-400">Is he a Grill Sergeant, a Pun-dit, or something else entirely? Answer 10 questions to reveal his unique, AI-generated Dad Type!</p>
+            <button id="startBtn" class="mt-8 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-xl text-lg transition-all duration-300 transform hover:scale-105">
+                Let's Get Started
             </button>
         </div>
 
-        <!-- Certificate Display -->
-        <div id="certificateContainer" class="hidden text-center">
-            <canvas id="certificate" width="800" height="600" class="rounded-lg shadow-lg border-2 border-yellow-400 dark:border-yellow-600 w-full"></canvas>
-            <div class="mt-6 flex flex-wrap gap-4 justify-center">
-                <button id="downloadBtn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg transition">📥 Download</button>
-                <button id="shareBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-lg transition">📤 Share</button>
-                <button id="newBtn" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-lg transition">✨ Create New</button>
+        <!-- Quiz Screen -->
+        <div id="quizScreen" class="hidden p-8 md:p-12 page">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="font-display text-2xl font-bold text-gray-900 dark:text-white">Question <span id="questionNumber">1</span>/10</h2>
+                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 ml-4">
+                    <div id="progressBar" class="bg-blue-600 h-2.5 rounded-full" style="width: 10%"></div>
+                </div>
+            </div>
+            <p id="questionText" class="text-lg text-gray-700 dark:text-gray-300 mb-8 min-h-[60px]"></p>
+            <div id="answersGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Answer buttons will be injected here -->
             </div>
         </div>
 
-        <!-- Message Modal -->
-        <div id="messageModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
-             <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-sm text-center">
-                <p id="modalMessageText" class="text-lg mb-4"></p>
-                <button id="modalCloseBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg">OK</button>
+        <!-- Loading Screen -->
+        <div id="loadingScreen" class="hidden p-8 md:p-12 text-center page">
+             <div class="flex justify-center items-center mb-6">
+                <div class="animate-spin rounded-full h-16 w-16 border-b-4 border-blue-600"></div>
             </div>
+            <h2 class="font-display text-3xl font-bold text-gray-900 dark:text-white">Analyzing Dad-a...</h2>
+            <p class="mt-4 text-gray-600 dark:text-gray-400">Our highly advanced AI is crunching the numbers on dad jokes, cargo shorts, and thermostat settings. Please wait for the official diagnosis.</p>
         </div>
 
-    </div>
+        <!-- Result Screen -->
+        <div id="resultScreen" class="hidden p-8 md:p-12 page">
+            <div id="resultCard" class="bg-gray-50 dark:bg-gray-700 rounded-xl p-8 text-center border border-gray-200 dark:border-gray-600">
+                <p class="text-gray-600 dark:text-gray-400">Your Dad's Official Type is...</p>
+                <h2 id="dadTypeTitle" class="font-display text-4xl md:text-5xl font-bold text-blue-600 dark:text-blue-400 my-4"></h2>
+                <div id="dadTypeEmoji" class="text-7xl my-6"></div>
+                <p id="dadTypeDescription" class="text-left text-gray-700 dark:text-gray-300 whitespace-pre-line leading-relaxed"></p>
+            </div>
+             <div class="mt-8 flex flex-col md:flex-row gap-4">
+                <button id="shareBtn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-xl text-lg transition-all duration-300">
+                    Share Results
+                </button>
+                <button id="restartBtn" class="w-full bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-xl text-lg transition-all duration-300">
+                    Start Over
+                </button>
+            </div>
+        </div>
+    </main>
 
 <script>
-    const generateBtn = document.getElementById('generateBtn');
-    const btnText = document.getElementById('btn-text');
-    const btnLoader = document.getElementById('btn-loader');
-    const certificateContainer = document.getElementById('certificateContainer');
-    const formContainer = document.getElementById('formContainer');
-    const dadNameInput = document.getElementById('dadName');
-    const childNameInput = document.getElementById('childName');
-    const messageModal = document.getElementById('messageModal');
-    const modalMessageText = document.getElementById('modalMessageText');
+    // --- DOM Elements ---
+    const startScreen = document.getElementById('startScreen');
+    const quizScreen = document.getElementById('quizScreen');
+    const loadingScreen = document.getElementById('loadingScreen');
+    const resultScreen = document.getElementById('resultScreen');
+
+    const startBtn = document.getElementById('startBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    const shareBtn = document.getElementById('shareBtn');
+
+    const questionNumberEl = document.getElementById('questionNumber');
+    const progressBarEl = document.getElementById('progressBar');
+    const questionTextEl = document.getElementById('questionText');
+    const answersGridEl = document.getElementById('answersGrid');
+    
+    const dadTypeTitleEl = document.getElementById('dadTypeTitle');
+    const dadTypeEmojiEl = document.getElementById('dadTypeEmoji');
+    const dadTypeDescriptionEl = document.getElementById('dadTypeDescription');
+
+    // --- Quiz Data & State ---
+    const questions = [
+        {
+            question: "What is the dad's primary mode of transportation on weekends?",
+            answers: ["A trusty lawnmower", "A slightly-too-old minivan", "A bicycle he swears he'll fix up", "His favorite armchair"]
+        },
+        {
+            question: "A DIY project begins with:",
+            answers: ["A confident 'I can fix that'", "A 3-hour trip to the hardware store", "Watching a dozen YouTube tutorials", "Misplacing the one tool he needs"]
+        },
+        {
+            question: "How does he handle the thermostat?",
+            answers: ["Guards it like a dragon protecting its hoard", "Secretly adjusts it and denies everything", "Wears a sweater indoors year-round", "What's a thermostat?"]
+        },
+        {
+            question: "His signature dance move is:",
+            answers: ["The 'embarrass the kids' shuffle", "The 'grilling and swaying' groove", "The 'finger point and head nod'", "Bold of you to assume he dances"]
+        },
+        {
+            question: "When telling a joke, he mostly gets:",
+            answers: ["Groans and eye-rolls", "A single, pity laugh", "Confused silence", "Rapturous applause (in his head)"]
+        },
+        {
+            question: "His go-to footwear consists of:",
+            answers: ["Impeccably white New Balance sneakers", "Sandals (with or without socks)", "Whatever is closest to the door", "Barefoot, communing with the lawn"]
+        },
+        {
+            question: "What's his philosophy on grilling?",
+            answers: ["It's not a meal, it's a science", "Everything can be grilled", "The tongs are an extension of his soul", "Slightly burnt means it's done"]
+        },
+        {
+            question: "When assembling furniture, the instructions are:",
+            answers: ["A vague suggestion", "The enemy", "A last resort after 2 hours of failure", "Followed to the letter, with commentary"]
+        },
+        {
+            question: "A family movie night means he will...",
+            answers: ["Fall asleep within 20 minutes, snoring gently", "Provide a running commentary of plot holes", "Quote every line from his favorite part", "Keep asking 'who's that guy?'"]
+        },
+        {
+            question: "His greatest superpower is:",
+            answers: ["The ability to find anything that was 'just here'", "An uncanny knowledge of historical documentaries", "Carrying all the grocery bags in one trip", "Falling asleep instantly in any chair"]
+        },
+    ];
+
+    let currentQuestionIndex = 0;
+    let userAnswers = [];
 
     // --- Event Listeners ---
-    generateBtn.addEventListener('click', handleCertificateGeneration);
-    document.getElementById('downloadBtn').addEventListener('click', downloadCertificate);
-    document.getElementById('shareBtn').addEventListener('click', shareCertificate);
-    document.getElementById('newBtn').addEventListener('click', resetForm);
-    document.getElementById('modalCloseBtn').addEventListener('click', () => messageModal.classList.add('hidden'));
+    startBtn.addEventListener('click', startQuiz);
+    restartBtn.addEventListener('click', startQuiz);
+    shareBtn.addEventListener('click', shareResults);
 
-    /**
-     * Shows a custom modal with a message.
-     * @param {string} message - The message to display.
-     */
-    function showMessage(message) {
-        modalMessageText.textContent = message;
-        messageModal.classList.remove('hidden');
+    // --- Functions ---
+    function showScreen(screen) {
+        startScreen.classList.add('hidden');
+        quizScreen.classList.add('hidden');
+        loadingScreen.classList.add('hidden');
+        resultScreen.classList.add('hidden');
+        screen.classList.remove('hidden');
     }
 
-    /**
-     * Main function to handle certificate generation process.
-     * It validates input, calls the Gemini API, and then draws the certificate.
-     */
-    async function handleCertificateGeneration() {
-        const dadName = dadNameInput.value.trim();
-        const childName = childNameInput.value.trim();
+    function startQuiz() {
+        currentQuestionIndex = 0;
+        userAnswers = [];
+        showScreen(quizScreen);
+        displayQuestion();
+    }
 
-        if (!dadName || !childName) {
-            showMessage('Please fill in both name fields!');
-            return;
+    function displayQuestion() {
+        const currentQuestion = questions[currentQuestionIndex];
+        questionNumberEl.textContent = currentQuestionIndex + 1;
+        questionTextEl.textContent = currentQuestion.question;
+        
+        // Update progress bar
+        const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+        progressBarEl.style.width = `${progress}%`;
+
+        // Clear old answers and display new ones
+        answersGridEl.innerHTML = '';
+        currentQuestion.answers.forEach(answer => {
+            const button = document.createElement('button');
+            button.className = "answer-btn w-full p-4 bg-gray-100 dark:bg-gray-700 hover:bg-blue-100 dark:hover:bg-blue-900 rounded-lg text-left transition-all duration-200";
+            button.textContent = answer;
+            button.addEventListener('click', () => selectAnswer(answer));
+            answersGridEl.appendChild(button);
+        });
+    }
+
+    function selectAnswer(answer) {
+        userAnswers.push({ question: questions[currentQuestionIndex].question, answer: answer });
+        currentQuestionIndex++;
+
+        if (currentQuestionIndex < questions.length) {
+            displayQuestion();
+        } else {
+            getDadType();
         }
+    }
 
-        const achievements = getSelectedAchievements();
-        if (achievements.length === 0) {
-            showMessage('Please select at least one achievement!');
-            return;
-        }
+    async function getDadType() {
+        showScreen(loadingScreen);
 
-        // --- Start loading state ---
-        setLoading(true);
+        const prompt = `
+            Based on the following quiz answers, generate a "Dad Type".
+            The user answered a 10-question quiz about their dad. Here are their answers:
+            ${userAnswers.map((ua, i) => `${i + 1}. Q: ${ua.question}\nA: ${ua.answer}`).join('\n')}
 
-        try {
-            // --- Gemini API Call ---
-            const prompt = `Based on the following achievements: ${achievements.join(', ')}, create a funny and epic official title for a dad named ${dadName}. The title should be short, punchy, and sound like it belongs on a certificate. For example: 'Supreme Chancellor of Backyard Barbecues' or 'Grand Protector of the Sacred Thermostat'. Only return the title itself, with no extra text or quotation marks.`;
+            Your task is to return a JSON object with the following schema. Do NOT return any other text, just the JSON object.
+            The tone should be humorous, loving, and slightly exaggerated, but ultimately very positive and heartwarming.
             
-            let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
-            const payload = { contents: chatHistory };
-            const apiKey = ""; // API key is handled by the environment
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+            The JSON object should contain:
+            1. "dadTypeTitle": A short, catchy, and creative title for this Dad Type (e.g., "The Suburban Zen Master", "The Pun-damental Force", "Chief Executive of Comfort").
+            2. "dadTypeEmoji": A single emoji that best represents this Dad Type.
+            3. "description": A 3-paragraph description.
+               - Paragraph 1: Introduce the Dad Type with humor and affection, based on the quiz answers.
+               - Paragraph 2: Elaborate on his key characteristics and "superpowers".
+               - Paragraph 3: Conclude with a heartwarming statement about why this Dad Type is the best.
+        `;
 
+        const schema = {
+            type: "OBJECT",
+            properties: {
+                "dadTypeTitle": { "type": "STRING" },
+                "dadTypeEmoji": { "type": "STRING" },
+                "description": { "type": "STRING" }
+            },
+            required: ["dadTypeTitle", "dadTypeEmoji", "description"]
+        };
+        
+        try {
+            const apiKey = ""; // The environment provides the key
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ role: "user", parts: [{ text: prompt }] }],
+                generationConfig: {
+                    responseMimeType: "application/json",
+                    responseSchema: schema
+                }
+            };
+            
             const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -163,235 +253,52 @@
             });
 
             if (!response.ok) {
-                throw new Error(`API request failed with status ${response.status}`);
+                throw new Error(`API Error: ${response.status}`);
             }
 
             const result = await response.json();
+            const jsonText = result.candidates[0].content.parts[0].text;
+            const dadTypeData = JSON.parse(jsonText);
             
-            let dadTitle = 'OUTSTANDING DAD'; // Default title
-            if (result.candidates && result.candidates.length > 0 &&
-                result.candidates[0].content && result.candidates[0].content.parts &&
-                result.candidates[0].content.parts.length > 0) {
-                dadTitle = result.candidates[0].content.parts[0].text.trim();
-            } else {
-                 console.warn("Gemini API returned an unexpected structure, using default title.", result);
-            }
-
-            // --- Draw certificate with AI-generated title ---
-            drawCertificate(dadName, childName, achievements, dadTitle);
-            formContainer.classList.add('hidden');
-            certificateContainer.classList.remove('hidden');
-            certificateContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            displayResults(dadTypeData);
 
         } catch (error) {
-            console.error("Error generating certificate:", error);
-            showMessage('Could not generate AI title. Using a default one! Please try again.');
-            // Fallback to drawing with a default title if API fails
-            drawCertificate(dadName, childName, achievements, 'INCREDIBLY AWESOME DAD');
-            formContainer.classList.add('hidden');
-            certificateContainer.classList.remove('hidden');
-
-        } finally {
-            // --- End loading state ---
-            setLoading(false);
-        }
-    }
-
-    /**
-     * Gathers the selected achievements from the checkboxes.
-     * @returns {string[]} An array of selected achievement texts.
-     */
-    function getSelectedAchievements() {
-        const achievements = [];
-        const achievementMap = {
-            jokes: 'Master of Dad Jokes',
-            grill: 'BBQ Champion',
-            fix: 'Can Fix Anything',
-            taxi: '24/7 Taxi Service',
-            thermostat: 'Thermostat Guardian',
-            nap: 'Power Nap Expert'
-        };
-
-        Object.keys(achievementMap).forEach(key => {
-            const checkbox = document.getElementById(key);
-            if (checkbox && checkbox.checked) {
-                achievements.push(achievementMap[key]);
-            }
-        });
-        return achievements;
-    }
-
-    /**
-     * Draws the certificate content onto the canvas.
-     * @param {string} dadName - The name of the dad.
-     * @param {string} childName - The name of the child/giver.
-     * @param {string[]} achievements - List of achievements.
-     * @param {string} dadTitle - The AI-generated or default title for the dad.
-     */
-    function drawCertificate(dadName, childName, achievements, dadTitle) {
-        const canvas = document.getElementById('certificate');
-        const ctx = canvas.getContext('2d');
-        const w = canvas.width;
-        const h = canvas.height;
-
-        // --- Styles ---
-        const bgColor = '#fdfbf2';
-        const primaryColor = '#1e3c72';
-        const accentColor = '#d4af37';
-        
-        // Background
-        ctx.fillStyle = bgColor;
-        ctx.fillRect(0, 0, w, h);
-
-        // Border
-        ctx.strokeStyle = accentColor;
-        ctx.lineWidth = 20;
-        ctx.strokeRect(10, 10, w - 20, h - 20);
-        ctx.lineWidth = 2;
-        ctx.strokeRect(30, 30, w - 60, h - 60);
-        
-        // --- Text Content ---
-        ctx.textAlign = 'center';
-        
-        // Main Title
-        ctx.fillStyle = primaryColor;
-        ctx.font = 'bold 48px "Playfair Display", serif';
-        ctx.fillText('Certificate of Dadcellence', w / 2, 100);
-
-        // Subtitle
-        ctx.font = '24px "Inter", sans-serif';
-        ctx.fillText('This proudly certifies that', w / 2, 160);
-
-        // Dad's Name
-        ctx.font = 'bold 40px "Playfair Display", serif';
-        ctx.fillStyle = accentColor;
-        ctx.fillText(dadName, w / 2, 215);
-        
-        // Recognition Text
-        ctx.fillStyle = primaryColor;
-        ctx.font = '20px "Inter", sans-serif';
-        ctx.fillText('has been officially recognized as a', w / 2, 260);
-
-        // AI Generated Title
-        ctx.font = 'bold 32px "Playfair Display", serif';
-        ctx.fillStyle = primaryColor;
-        // Wrap text if too long
-        wrapText(ctx, dadTitle.toUpperCase(), w / 2, 305, w - 100, 38);
-        
-        // Achievements
-        let yPos = 380;
-        ctx.font = 'bold 18px "Inter", sans-serif';
-        ctx.fillText('For exceptional performance in:', w / 2, yPos);
-        yPos += 30;
-        ctx.font = '16px "Inter", sans-serif';
-        achievements.forEach(achievement => {
-            ctx.fillText(`• ${achievement}`, w / 2, yPos);
-            yPos += 25;
-        });
-
-        // Awarded Date
-        const dateStr = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-        ctx.font = '16px "Inter", sans-serif';
-        ctx.fillText(`Awarded on ${dateStr}`, w / 2 - 150, h - 80);
-        
-        // Signature
-        ctx.font = 'italic 18px "Playfair Display", serif';
-        ctx.fillText(childName, w / 2 + 150, h - 95);
-        ctx.strokeStyle = primaryColor;
-        ctx.beginPath();
-        ctx.moveTo(w / 2 + 80, h - 80);
-        ctx.lineTo(w / 2 + 220, h - 80);
-        ctx.stroke();
-        ctx.font = '14px "Inter", sans-serif';
-        ctx.fillText('With Love From', w / 2 + 150, h - 65);
-    }
-    
-    /**
-     * Utility to wrap long text on canvas.
-     */
-    function wrapText(context, text, x, y, maxWidth, lineHeight) {
-        const words = text.split(' ');
-        let line = '';
-        for(let n = 0; n < words.length; n++) {
-            const testLine = line + words[n] + ' ';
-            const metrics = context.measureText(testLine);
-            const testWidth = metrics.width;
-            if (testWidth > maxWidth && n > 0) {
-                context.fillText(line, x, y);
-                line = words[n] + ' ';
-                y += lineHeight;
-            } else {
-                line = testLine;
-            }
-        }
-        context.fillText(line, x, y);
-    }
-
-    /**
-     * Manages the loading state of the generate button.
-     * @param {boolean} isLoading - True to show loader, false to hide.
-     */
-    function setLoading(isLoading) {
-        if (isLoading) {
-            generateBtn.disabled = true;
-            btnText.classList.add('hidden');
-            btnLoader.classList.remove('hidden');
-        } else {
-            generateBtn.disabled = false;
-            btnText.classList.remove('hidden');
-            btnLoader.classList.add('hidden');
-        }
-    }
-
-    /**
-     * Downloads the certificate as a PNG file.
-     */
-    function downloadCertificate() {
-        const canvas = document.getElementById('certificate');
-        const link = document.createElement('a');
-        link.download = `dad-certificate-${Date.now()}.png`;
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-    }
-
-    /**
-     * Shares the certificate using the Web Share API, with a fallback to download.
-     */
-    function shareCertificate() {
-        const canvas = document.getElementById('certificate');
-        canvas.toBlob(async (blob) => {
-            const file = new File([blob], 'dad-certificate.png', { type: 'image/png' });
-            const shareData = {
-                files: [file],
-                title: 'Official Dad Certificate',
-                text: 'Check out this awesome certificate I made! 🏆'
+            console.error("Failed to get Dad Type:", error);
+            // Fallback in case of API error
+            const fallbackData = {
+                dadTypeTitle: "Universally Awesome Dad",
+                dadTypeEmoji: "🏆",
+                description: "While our AI is taking a quick nap (probably in a comfy armchair), let's just say this dad defies all categories.\n\nHe's a unique blend of handyman, comedian, and chauffeur, whose main superpower is simply being there. He's a legend in his own right.\n\nSo, while the AI reboots, know that you've got one of the all-time greats. A true Hall-of-Famer in the game of fatherhood."
             };
-            if (navigator.canShare && navigator.canShare(shareData)) {
-                try {
-                    await navigator.share(shareData);
-                } catch (err) {
-                    console.error('Share failed:', err);
-                    showMessage('Sharing was cancelled or failed.');
-                }
-            } else {
-                showMessage('Web Share not supported. Downloading instead!');
-                downloadCertificate();
-            }
-        }, 'image/png');
+            displayResults(fallbackData);
+        }
     }
 
-    /**
-     * Resets the form to its initial state to create a new certificate.
-     */
-    function resetForm() {
-        certificateContainer.classList.add('hidden');
-        formContainer.classList.remove('hidden');
-        dadNameInput.value = 'Captain Awesome';
-        childNameInput.value = 'The Adoring Fans';
-        document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-            cb.checked = (cb.id === 'jokes' || cb.id === 'grill' || cb.id === 'thermostat');
-        });
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+    function displayResults(data) {
+        dadTypeTitleEl.textContent = data.dadTypeTitle;
+        dadTypeEmojiEl.textContent = data.dadTypeEmoji;
+        dadTypeDescriptionEl.textContent = data.description;
+        showScreen(resultScreen);
+    }
+
+    function shareResults() {
+        const title = dadTypeTitleEl.textContent;
+        const emoji = dadTypeEmojiEl.textContent;
+        const text = `I took the "Official Dad Type Analyzer" and my dad is a ${title} ${emoji}! Check it out.`;
+        const url = window.location.href;
+
+        if (navigator.share) {
+            navigator.share({
+                title: 'My Dad Type!',
+                text: text,
+                url: url
+            }).catch(console.error);
+        } else {
+            // Fallback for browsers that don't support Web Share API
+            navigator.clipboard.writeText(`${text} ${url}`).then(() => {
+                alert('Results copied to clipboard! Ready to share.');
+            });
+        }
     }
 </script>
 </body>
