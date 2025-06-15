@@ -1,641 +1,398 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Ultimate Dad Tier List 👨‍👧‍👦</title>
+    <title>Official Dad Certificate Generator 🏆</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* Custom font for certificate-style text */
+        .font-serif {
+            font-family: 'Playfair Display', serif;
         }
-
-```
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-        background: #0a0a0a;
-        color: #fff;
-        min-height: 100vh;
-        overflow-x: hidden;
-    }
-
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-    }
-
-    .header {
-        text-align: center;
-        margin-bottom: 2rem;
-        position: relative;
-    }
-
-    .title {
-        font-size: clamp(2rem, 5vw, 3.5rem);
-        font-weight: 900;
-        background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24);
-        background-size: 300% 300%;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: gradient 3s ease infinite;
-        margin-bottom: 0.5rem;
-        text-transform: uppercase;
-        letter-spacing: -2px;
-    }
-
-    @keyframes gradient {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-
-    .subtitle {
-        color: #888;
-        font-size: 1.2rem;
-        margin-bottom: 2rem;
-    }
-
-    .tier-container {
-        background: #1a1a1a;
-        border-radius: 20px;
-        padding: 2rem;
-        margin-bottom: 2rem;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-    }
-
-    .tier {
-        display: flex;
-        margin-bottom: 1rem;
-        background: #2a2a2a;
-        border-radius: 15px;
-        overflow: hidden;
-        min-height: 120px;
-        transition: all 0.3s ease;
-    }
-
-    .tier:hover {
-        transform: scale(1.02);
-        box-shadow: 0 5px 20px rgba(255, 255, 255, 0.1);
-    }
-
-    .tier-label {
-        width: 100px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 900;
-        font-size: 2rem;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    }
-
-    .tier-s { background: linear-gradient(135deg, #f39c12, #f1c40f); }
-    .tier-a { background: linear-gradient(135deg, #e74c3c, #c0392b); }
-    .tier-b { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
-    .tier-c { background: linear-gradient(135deg, #3498db, #2980b9); }
-    .tier-d { background: linear-gradient(135deg, #1abc9c, #16a085); }
-
-    .tier-items {
-        flex: 1;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        padding: 15px;
-        min-height: 120px;
-        position: relative;
-    }
-
-    .tier-items.drag-over {
-        background: rgba(255, 255, 255, 0.1);
-    }
-
-    .item-pool {
-        background: #1a1a1a;
-        border-radius: 20px;
-        padding: 2rem;
-        margin-bottom: 2rem;
-    }
-
-    .pool-title {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-        text-align: center;
-        color: #fff;
-    }
-
-    .items-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 15px;
-        justify-content: center;
-        min-height: 100px;
-    }
-
-    .dad-item {
-        background: #333;
-        border: 3px solid #444;
-        border-radius: 15px;
-        padding: 15px 20px;
-        cursor: grab;
-        transition: all 0.2s ease;
-        font-size: 2.5rem;
-        position: relative;
-        user-select: none;
-    }
-
-    .dad-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
-        border-color: #666;
-    }
-
-    .dad-item.dragging {
-        opacity: 0.5;
-        cursor: grabbing;
-        transform: rotate(5deg);
-    }
-
-    .dad-item .label {
-        display: block;
-        font-size: 0.8rem;
-        margin-top: 5px;
-        text-align: center;
-        color: #ccc;
-    }
-
-    .share-section {
-        text-align: center;
-        margin-top: 3rem;
-    }
-
-    .share-btn {
-        background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
-        border: none;
-        color: white;
-        padding: 1.5rem 3rem;
-        border-radius: 50px;
-        font-size: 1.3rem;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .share-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
-    }
-
-    .share-btn::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-        transition: left 0.5s;
-    }
-
-    .share-btn:hover::before {
-        left: 100%;
-    }
-
-    .result-modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.9);
-        z-index: 1000;
-        padding: 20px;
-        overflow-y: auto;
-    }
-
-    .modal-content {
-        background: #1a1a1a;
-        max-width: 600px;
-        margin: 2rem auto;
-        padding: 3rem;
-        border-radius: 20px;
-        text-align: center;
-        position: relative;
-    }
-
-    .close-modal {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        font-size: 2rem;
-        cursor: pointer;
-        color: #666;
-    }
-
-    .close-modal:hover {
-        color: #fff;
-    }
-
-    .result-title {
-        font-size: 2rem;
-        margin-bottom: 2rem;
-        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-    .result-image {
-        width: 100%;
-        max-width: 500px;
-        background: #2a2a2a;
-        border-radius: 15px;
-        padding: 2rem;
-        margin-bottom: 2rem;
-    }
-
-    .mini-tier {
-        display: flex;
-        margin-bottom: 0.5rem;
-        background: #333;
-        border-radius: 10px;
-        overflow: hidden;
-        font-size: 0.9rem;
-    }
-
-    .mini-tier-label {
-        width: 40px;
-        padding: 10px;
-        text-align: center;
-        font-weight: bold;
-    }
-
-    .mini-tier-items {
-        flex: 1;
-        padding: 10px;
-        display: flex;
-        gap: 5px;
-        flex-wrap: wrap;
-    }
-
-    .share-buttons {
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin-top: 2rem;
-    }
-
-    .social-btn {
-        padding: 1rem 2rem;
-        border: none;
-        border-radius: 10px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        color: white;
-        text-decoration: none;
-        display: inline-block;
-    }
-
-    .twitter-btn { background: #1DA1F2; }
-    .facebook-btn { background: #4267B2; }
-    .copy-btn { background: #6c757d; }
-
-    .social-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .instructions {
-        background: #2a2a2a;
-        padding: 1.5rem;
-        border-radius: 15px;
-        margin-bottom: 2rem;
-        text-align: center;
-        color: #ccc;
-    }
-
-    @media (max-width: 768px) {
-        .tier-label {
-            width: 60px;
-            font-size: 1.5rem;
+        .font-sans {
+            font-family: 'Inter', sans-serif;
         }
-        
-        .dad-item {
-            font-size: 2rem;
-            padding: 10px 15px;
+        /* Custom animation for the loading spinner */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-        
-        .title {
-            letter-spacing: -1px;
+        .loading-spinner {
+            animation: spin 1s linear infinite;
         }
-    }
-
-    .pulse {
-        animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-        100% { transform: scale(1); }
-    }
-</style>
-```
-
+    </style>
 </head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1 class="title">The Ultimate Dad Tier List</h1>
-            <p class="subtitle">Rank these legendary dad traits and find out what kind of dad you (or your dad) really are!</p>
+<body class="bg-gray-100 dark:bg-gray-900 font-sans text-gray-800 dark:text-gray-200 flex items-center justify-center min-h-screen p-4">
+
+    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-6 md:p-10 w-full max-w-3xl">
+        <div id="formContainer">
+            <h1 class="font-serif text-3xl md:text-4xl font-bold text-center text-blue-800 dark:text-blue-400">Official Dad Certificate Generator 🏆</h1>
+            <p class="text-center text-gray-600 dark:text-gray-400 mt-2 mb-8">Create a personalized, AI-enhanced certificate for the world's greatest dad!</p>
+
+            <!-- Form Section -->
+            <div class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="dadName" class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Dad's Name:</label>
+                        <input type="text" id="dadName" placeholder="e.g., John Smith" value="Captain Awesome" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                    </div>
+                    <div>
+                        <label for="childName" class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">From:</label>
+                        <input type="text" id="childName" placeholder="e.g., The Kids" value="The Adoring Fans" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-3">Dad Achievements (Select all that apply):</label>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <div class="flex items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <input type="checkbox" id="jokes" class="h-5 w-5 rounded text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-600 dark:bg-gray-900 dark:focus:ring-offset-gray-800" checked><label for="jokes" class="ml-3 text-sm font-medium">🤣 Master of Dad Jokes</label>
+                        </div>
+                        <div class="flex items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <input type="checkbox" id="grill" class="h-5 w-5 rounded text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-600 dark:bg-gray-900 dark:focus:ring-offset-gray-800" checked><label for="grill" class="ml-3 text-sm font-medium">🍖 BBQ Champion</label>
+                        </div>
+                        <div class="flex items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <input type="checkbox" id="fix" class="h-5 w-5 rounded text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-600 dark:bg-gray-900 dark:focus:ring-offset-gray-800"><label for="fix" class="ml-3 text-sm font-medium">🔧 Can Fix Anything</label>
+                        </div>
+                        <div class="flex items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <input type="checkbox" id="taxi" class="h-5 w-5 rounded text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-600 dark:bg-gray-900 dark:focus:ring-offset-gray-800"><label for="taxi" class="ml-3 text-sm font-medium">🚗 24/7 Taxi Service</label>
+                        </div>
+                        <div class="flex items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <input type="checkbox" id="thermostat" class="h-5 w-5 rounded text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-600 dark:bg-gray-900 dark:focus:ring-offset-gray-800" checked><label for="thermostat" class="ml-3 text-sm font-medium">🌡️ Thermostat Guardian</label>
+                        </div>
+                         <div class="flex items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <input type="checkbox" id="nap" class="h-5 w-5 rounded text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-600 dark:bg-gray-900 dark:focus:ring-offset-gray-800"><label for="nap" class="ml-3 text-sm font-medium">😴 Power Nap Expert</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Generate Button -->
+            <button id="generateBtn" class="w-full mt-8 bg-blue-700 hover:bg-blue-800 text-white font-bold py-4 px-4 rounded-lg text-lg flex items-center justify-center transition-transform transform hover:scale-105 disabled:bg-blue-400 disabled:cursor-not-allowed">
+                <span id="btn-text">✨ Generate with AI ✨</span>
+                <div id="btn-loader" class="hidden w-6 h-6 border-4 border-white border-t-transparent rounded-full loading-spinner"></div>
+            </button>
         </div>
 
-```
-    <div class="instructions">
-        <p>📋 Drag and drop the dad traits below into the tiers. Be honest - we all know where "cargo shorts" really belongs...</p>
-    </div>
+        <!-- Certificate Display -->
+        <div id="certificateContainer" class="hidden text-center">
+            <canvas id="certificate" width="800" height="600" class="rounded-lg shadow-lg border-2 border-yellow-400 dark:border-yellow-600 w-full"></canvas>
+            <div class="mt-6 flex flex-wrap gap-4 justify-center">
+                <button id="downloadBtn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg transition">📥 Download</button>
+                <button id="shareBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-lg transition">📤 Share</button>
+                <button id="newBtn" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-lg transition">✨ Create New</button>
+            </div>
+        </div>
 
-    <div class="tier-container">
-        <div class="tier">
-            <div class="tier-label tier-s">S</div>
-            <div class="tier-items" data-tier="S"></div>
+        <!-- Message Modal -->
+        <div id="messageModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+             <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-sm text-center">
+                <p id="modalMessageText" class="text-lg mb-4"></p>
+                <button id="modalCloseBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg">OK</button>
+            </div>
         </div>
-        <div class="tier">
-            <div class="tier-label tier-a">A</div>
-            <div class="tier-items" data-tier="A"></div>
-        </div>
-        <div class="tier">
-            <div class="tier-label tier-b">B</div>
-            <div class="tier-items" data-tier="B"></div>
-        </div>
-        <div class="tier">
-            <div class="tier-label tier-c">C</div>
-            <div class="tier-items" data-tier="C"></div>
-        </div>
-        <div class="tier">
-            <div class="tier-label tier-d">D</div>
-            <div class="tier-items" data-tier="D"></div>
-        </div>
-    </div>
 
-    <div class="item-pool">
-        <h2 class="pool-title">Dad Traits to Rank</h2>
-        <div class="items-container" id="itemsContainer">
-            <div class="dad-item" draggable="true" data-item="grill">
-                🍖
-                <span class="label">Grill Master</span>
-            </div>
-            <div class="dad-item" draggable="true" data-item="jokes">
-                😄
-                <span class="label">Dad Jokes</span>
-            </div>
-            <div class="dad-item" draggable="true" data-item="thermostat">
-                🌡️
-                <span class="label">Thermostat Guard</span>
-            </div>
-            <div class="dad-item" draggable="true" data-item="lawn">
-                🌱
-                <span class="label">Lawn Obsession</span>
-            </div>
-            <div class="dad-item" draggable="true" data-item="nap">
-                😴
-                <span class="label">Chair Naps</span>
-            </div>
-            <div class="dad-item" draggable="true" data-item="cargo">
-                👖
-                <span class="label">Cargo Shorts</span>
-            </div>
-            <div class="dad-item" draggable="true" data-item="sneeze">
-                🤧
-                <span class="label">Loud Sneezes</span>
-            </div>
-            <div class="dad-item" draggable="true" data-item="history">
-                📺
-                <span class="label">History Channel</span>
-            </div>
-            <div class="dad-item" draggable="true" data-item="early">
-                ⏰
-                <span class="label">5am Wake-ups</span>
-            </div>
-            <div class="dad-item" draggable="true" data-item="tools">
-                🔧
-                <span class="label">Tool Collection</span>
-            </div>
-            <div class="dad-item" draggable="true" data-item="socks">
-                🧦
-                <span class="label">Socks & Sandals</span>
-            </div>
-            <div class="dad-item" draggable="true" data-item="car">
-                🚗
-                <span class="label">"Ask Mom"</span>
-            </div>
-        </div>
     </div>
-
-    <div class="share-section">
-        <button class="share-btn pulse" id="shareBtn">Generate My Dad Tier List! 🏆</button>
-    </div>
-</div>
-
-<div class="result-modal" id="resultModal">
-    <div class="modal-content">
-        <span class="close-modal" id="closeModal">&times;</span>
-        <h2 class="result-title">Your Dad Tier List Results!</h2>
-        <div class="result-image" id="resultImage"></div>
-        <div class="share-buttons">
-            <a href="#" class="social-btn twitter-btn" id="twitterShare">Share on Twitter</a>
-            <a href="#" class="social-btn facebook-btn" id="facebookShare">Share on Facebook</a>
-            <button class="social-btn copy-btn" id="copyLink">Copy Results</button>
-        </div>
-    </div>
-</div>
 
 <script>
-    let draggedItem = null;
-    const items = document.querySelectorAll('.dad-item');
-    const tierItems = document.querySelectorAll('.tier-items');
-    const itemsContainer = document.getElementById('itemsContainer');
+    const generateBtn = document.getElementById('generateBtn');
+    const btnText = document.getElementById('btn-text');
+    const btnLoader = document.getElementById('btn-loader');
+    const certificateContainer = document.getElementById('certificateContainer');
+    const formContainer = document.getElementById('formContainer');
+    const dadNameInput = document.getElementById('dadName');
+    const childNameInput = document.getElementById('childName');
+    const messageModal = document.getElementById('messageModal');
+    const modalMessageText = document.getElementById('modalMessageText');
 
-    // Drag and drop functionality
-    items.forEach(item => {
-        item.addEventListener('dragstart', (e) => {
-            draggedItem = e.target;
-            e.target.classList.add('dragging');
-        });
+    // --- Event Listeners ---
+    generateBtn.addEventListener('click', handleCertificateGeneration);
+    document.getElementById('downloadBtn').addEventListener('click', downloadCertificate);
+    document.getElementById('shareBtn').addEventListener('click', shareCertificate);
+    document.getElementById('newBtn').addEventListener('click', resetForm);
+    document.getElementById('modalCloseBtn').addEventListener('click', () => messageModal.classList.add('hidden'));
 
-        item.addEventListener('dragend', (e) => {
-            e.target.classList.remove('dragging');
-        });
-    });
+    /**
+     * Shows a custom modal with a message.
+     * @param {string} message - The message to display.
+     */
+    function showMessage(message) {
+        modalMessageText.textContent = message;
+        messageModal.classList.remove('hidden');
+    }
 
-    [itemsContainer, ...tierItems].forEach(container => {
-        container.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            container.classList.add('drag-over');
-        });
+    /**
+     * Main function to handle certificate generation process.
+     * It validates input, calls the Gemini API, and then draws the certificate.
+     */
+    async function handleCertificateGeneration() {
+        const dadName = dadNameInput.value.trim();
+        const childName = childNameInput.value.trim();
 
-        container.addEventListener('dragleave', () => {
-            container.classList.remove('drag-over');
-        });
-
-        container.addEventListener('drop', (e) => {
-            e.preventDefault();
-            if (draggedItem) {
-                container.appendChild(draggedItem);
-                container.classList.remove('drag-over');
-            }
-        });
-    });
-
-    // Touch support for mobile
-    let touchItem = null;
-    let touchOffset = { x: 0, y: 0 };
-
-    items.forEach(item => {
-        item.addEventListener('touchstart', (e) => {
-            touchItem = e.target;
-            const touch = e.touches[0];
-            const rect = touchItem.getBoundingClientRect();
-            touchOffset.x = touch.clientX - rect.left;
-            touchOffset.y = touch.clientY - rect.top;
-            touchItem.style.position = 'fixed';
-            touchItem.style.zIndex = '1000';
-        });
-
-        item.addEventListener('touchmove', (e) => {
-            if (!touchItem) return;
-            e.preventDefault();
-            const touch = e.touches[0];
-            touchItem.style.left = `${touch.clientX - touchOffset.x}px`;
-            touchItem.style.top = `${touch.clientY - touchOffset.y}px`;
-        });
-
-        item.addEventListener('touchend', (e) => {
-            if (!touchItem) return;
-            const touch = e.changedTouches[0];
-            const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
-            
-            touchItem.style.position = '';
-            touchItem.style.zIndex = '';
-            touchItem.style.left = '';
-            touchItem.style.top = '';
-
-            if (elementBelow) {
-                const tierContainer = elementBelow.closest('.tier-items') || elementBelow.closest('.items-container');
-                if (tierContainer) {
-                    tierContainer.appendChild(touchItem);
-                }
-            }
-            touchItem = null;
-        });
-    });
-
-    // Generate results
-    document.getElementById('shareBtn').addEventListener('click', generateResults);
-
-    function generateResults() {
-        const tiers = {
-            S: [],
-            A: [],
-            B: [],
-            C: [],
-            D: []
-        };
-
-        tierItems.forEach(tierContainer => {
-            const tier = tierContainer.dataset.tier;
-            const items = tierContainer.querySelectorAll('.dad-item');
-            items.forEach(item => {
-                tiers[tier].push({
-                    emoji: item.childNodes[0].textContent.trim(),
-                    label: item.querySelector('.label').textContent
-                });
-            });
-        });
-
-        // Check if user has ranked items
-        const totalRanked = Object.values(tiers).flat().length;
-        if (totalRanked === 0) {
-            alert('Please rank at least some dad traits first!');
+        if (!dadName || !childName) {
+            showMessage('Please fill in both name fields!');
             return;
         }
 
-        // Generate result display
-        const resultImage = document.getElementById('resultImage');
-        resultImage.innerHTML = `
-            <h3 style="margin-bottom: 1rem; color: #fff;">My Dad Tier List</h3>
-            ${Object.entries(tiers).map(([tier, items]) => `
-                <div class="mini-tier">
-                    <div class="mini-tier-label tier-${tier.toLowerCase()}">${tier}</div>
-                    <div class="mini-tier-items">
-                        ${items.map(item => `<span>${item.emoji}</span>`).join('')}
-                    </div>
-                </div>
-            `).join('')}
-            <p style="margin-top: 1rem; color: #888; font-size: 0.8rem;">Created at UltimateDadTierList.com</p>
-        `;
-
-        // Generate dad type based on rankings
-        const dadType = calculateDadType(tiers);
-        resultImage.innerHTML = `<h3 style="margin-bottom: 0.5rem; color: #4ecdc4;">You're a: ${dadType}</h3>` + resultImage.innerHTML;
-
-        // Show modal
-        document.getElementById('resultModal').style.display = 'block';
-
-        // Setup sharing
-        setupSharing(tiers, dadType);
-    }
-
-    function calculateDadType(tiers) {
-        // Fun logic to determine dad type based on S-tier choices
-        const sTierItems = tiers.S.map(item => item.label);
-        
-        if (sTierItems.includes('Grill Master')) return '🔥 BBQ Legend Dad';
-        if (sTierItems.includes('Dad Jokes')) return '😄 Comedy Gold Dad';
-        if (sTierItems.includes('Tool Collection')) return '🔧 Fix-It Felix Dad';
-        if (sTierItems.includes('Lawn Obsession')) return '🌱 Suburban King Dad';
-        if (sTierItems.includes('History Channel')) return '📚 Professor Dad';
-        if (sTierItems.includes('Chair Naps')) return '😴 Chill Master Dad';
-        
-        return '👑 Ultimate Dad';
-    }
-
-    function setupSharing(tiers, dadType) {
-        const shareText = `I'm a ${dadType}! Check out my Dad Tier List:\n\n` +
-            Object.entries(tiers)
-                .filter(([_, items]) => items.length > 0)
-                .map(([tier, items]) => `${tier}-Tier: ${items.map(i => i.emoji).join(' ')}`)
-                .join('\n') +
-            '\n\nMake your own at [link]';
-
-        document.getElementById('twitterShare').href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
-        document.getElementById('facebookShare').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`;
-        
-        document.getElementById('copyLink').addEventListener('click', () => {
-            navigator.clipboard.writeText(shareText);
-            alert('Copied to clipboard! Share your dad tier list! 📋');
-        });
-    }
-
-    // Close modal
-    document.getElementById('closeModal').addEventListener('click', () => {
-        document.getElementById('resultModal').style.display = 'none';
-    });
-
-    window.addEventListener('click', (e) => {
-        if (e.target === document.getElementById('resultModal')) {
-            document.getElementById('resultModal').style.display = 'none';
+        const achievements = getSelectedAchievements();
+        if (achievements.length === 0) {
+            showMessage('Please select at least one achievement!');
+            return;
         }
-    });
-</script>
-```
 
+        // --- Start loading state ---
+        setLoading(true);
+
+        try {
+            // --- Gemini API Call ---
+            const prompt = `Based on the following achievements: ${achievements.join(', ')}, create a funny and epic official title for a dad named ${dadName}. The title should be short, punchy, and sound like it belongs on a certificate. For example: 'Supreme Chancellor of Backyard Barbecues' or 'Grand Protector of the Sacred Thermostat'. Only return the title itself, with no extra text or quotation marks.`;
+            
+            let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+            const payload = { contents: chatHistory };
+            const apiKey = ""; // API key is handled by the environment
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                throw new Error(`API request failed with status ${response.status}`);
+            }
+
+            const result = await response.json();
+            
+            let dadTitle = 'OUTSTANDING DAD'; // Default title
+            if (result.candidates && result.candidates.length > 0 &&
+                result.candidates[0].content && result.candidates[0].content.parts &&
+                result.candidates[0].content.parts.length > 0) {
+                dadTitle = result.candidates[0].content.parts[0].text.trim();
+            } else {
+                 console.warn("Gemini API returned an unexpected structure, using default title.", result);
+            }
+
+            // --- Draw certificate with AI-generated title ---
+            drawCertificate(dadName, childName, achievements, dadTitle);
+            formContainer.classList.add('hidden');
+            certificateContainer.classList.remove('hidden');
+            certificateContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        } catch (error) {
+            console.error("Error generating certificate:", error);
+            showMessage('Could not generate AI title. Using a default one! Please try again.');
+            // Fallback to drawing with a default title if API fails
+            drawCertificate(dadName, childName, achievements, 'INCREDIBLY AWESOME DAD');
+            formContainer.classList.add('hidden');
+            certificateContainer.classList.remove('hidden');
+
+        } finally {
+            // --- End loading state ---
+            setLoading(false);
+        }
+    }
+
+    /**
+     * Gathers the selected achievements from the checkboxes.
+     * @returns {string[]} An array of selected achievement texts.
+     */
+    function getSelectedAchievements() {
+        const achievements = [];
+        const achievementMap = {
+            jokes: 'Master of Dad Jokes',
+            grill: 'BBQ Champion',
+            fix: 'Can Fix Anything',
+            taxi: '24/7 Taxi Service',
+            thermostat: 'Thermostat Guardian',
+            nap: 'Power Nap Expert'
+        };
+
+        Object.keys(achievementMap).forEach(key => {
+            const checkbox = document.getElementById(key);
+            if (checkbox && checkbox.checked) {
+                achievements.push(achievementMap[key]);
+            }
+        });
+        return achievements;
+    }
+
+    /**
+     * Draws the certificate content onto the canvas.
+     * @param {string} dadName - The name of the dad.
+     * @param {string} childName - The name of the child/giver.
+     * @param {string[]} achievements - List of achievements.
+     * @param {string} dadTitle - The AI-generated or default title for the dad.
+     */
+    function drawCertificate(dadName, childName, achievements, dadTitle) {
+        const canvas = document.getElementById('certificate');
+        const ctx = canvas.getContext('2d');
+        const w = canvas.width;
+        const h = canvas.height;
+
+        // --- Styles ---
+        const bgColor = '#fdfbf2';
+        const primaryColor = '#1e3c72';
+        const accentColor = '#d4af37';
+        
+        // Background
+        ctx.fillStyle = bgColor;
+        ctx.fillRect(0, 0, w, h);
+
+        // Border
+        ctx.strokeStyle = accentColor;
+        ctx.lineWidth = 20;
+        ctx.strokeRect(10, 10, w - 20, h - 20);
+        ctx.lineWidth = 2;
+        ctx.strokeRect(30, 30, w - 60, h - 60);
+        
+        // --- Text Content ---
+        ctx.textAlign = 'center';
+        
+        // Main Title
+        ctx.fillStyle = primaryColor;
+        ctx.font = 'bold 48px "Playfair Display", serif';
+        ctx.fillText('Certificate of Dadcellence', w / 2, 100);
+
+        // Subtitle
+        ctx.font = '24px "Inter", sans-serif';
+        ctx.fillText('This proudly certifies that', w / 2, 160);
+
+        // Dad's Name
+        ctx.font = 'bold 40px "Playfair Display", serif';
+        ctx.fillStyle = accentColor;
+        ctx.fillText(dadName, w / 2, 215);
+        
+        // Recognition Text
+        ctx.fillStyle = primaryColor;
+        ctx.font = '20px "Inter", sans-serif';
+        ctx.fillText('has been officially recognized as a', w / 2, 260);
+
+        // AI Generated Title
+        ctx.font = 'bold 32px "Playfair Display", serif';
+        ctx.fillStyle = primaryColor;
+        // Wrap text if too long
+        wrapText(ctx, dadTitle.toUpperCase(), w / 2, 305, w - 100, 38);
+        
+        // Achievements
+        let yPos = 380;
+        ctx.font = 'bold 18px "Inter", sans-serif';
+        ctx.fillText('For exceptional performance in:', w / 2, yPos);
+        yPos += 30;
+        ctx.font = '16px "Inter", sans-serif';
+        achievements.forEach(achievement => {
+            ctx.fillText(`• ${achievement}`, w / 2, yPos);
+            yPos += 25;
+        });
+
+        // Awarded Date
+        const dateStr = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        ctx.font = '16px "Inter", sans-serif';
+        ctx.fillText(`Awarded on ${dateStr}`, w / 2 - 150, h - 80);
+        
+        // Signature
+        ctx.font = 'italic 18px "Playfair Display", serif';
+        ctx.fillText(childName, w / 2 + 150, h - 95);
+        ctx.strokeStyle = primaryColor;
+        ctx.beginPath();
+        ctx.moveTo(w / 2 + 80, h - 80);
+        ctx.lineTo(w / 2 + 220, h - 80);
+        ctx.stroke();
+        ctx.font = '14px "Inter", sans-serif';
+        ctx.fillText('With Love From', w / 2 + 150, h - 65);
+    }
+    
+    /**
+     * Utility to wrap long text on canvas.
+     */
+    function wrapText(context, text, x, y, maxWidth, lineHeight) {
+        const words = text.split(' ');
+        let line = '';
+        for(let n = 0; n < words.length; n++) {
+            const testLine = line + words[n] + ' ';
+            const metrics = context.measureText(testLine);
+            const testWidth = metrics.width;
+            if (testWidth > maxWidth && n > 0) {
+                context.fillText(line, x, y);
+                line = words[n] + ' ';
+                y += lineHeight;
+            } else {
+                line = testLine;
+            }
+        }
+        context.fillText(line, x, y);
+    }
+
+    /**
+     * Manages the loading state of the generate button.
+     * @param {boolean} isLoading - True to show loader, false to hide.
+     */
+    function setLoading(isLoading) {
+        if (isLoading) {
+            generateBtn.disabled = true;
+            btnText.classList.add('hidden');
+            btnLoader.classList.remove('hidden');
+        } else {
+            generateBtn.disabled = false;
+            btnText.classList.remove('hidden');
+            btnLoader.classList.add('hidden');
+        }
+    }
+
+    /**
+     * Downloads the certificate as a PNG file.
+     */
+    function downloadCertificate() {
+        const canvas = document.getElementById('certificate');
+        const link = document.createElement('a');
+        link.download = `dad-certificate-${Date.now()}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    }
+
+    /**
+     * Shares the certificate using the Web Share API, with a fallback to download.
+     */
+    function shareCertificate() {
+        const canvas = document.getElementById('certificate');
+        canvas.toBlob(async (blob) => {
+            const file = new File([blob], 'dad-certificate.png', { type: 'image/png' });
+            const shareData = {
+                files: [file],
+                title: 'Official Dad Certificate',
+                text: 'Check out this awesome certificate I made! 🏆'
+            };
+            if (navigator.canShare && navigator.canShare(shareData)) {
+                try {
+                    await navigator.share(shareData);
+                } catch (err) {
+                    console.error('Share failed:', err);
+                    showMessage('Sharing was cancelled or failed.');
+                }
+            } else {
+                showMessage('Web Share not supported. Downloading instead!');
+                downloadCertificate();
+            }
+        }, 'image/png');
+    }
+
+    /**
+     * Resets the form to its initial state to create a new certificate.
+     */
+    function resetForm() {
+        certificateContainer.classList.add('hidden');
+        formContainer.classList.remove('hidden');
+        dadNameInput.value = 'Captain Awesome';
+        childNameInput.value = 'The Adoring Fans';
+        document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+            cb.checked = (cb.id === 'jokes' || cb.id === 'grill' || cb.id === 'thermostat');
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
 </body>
 </html>
